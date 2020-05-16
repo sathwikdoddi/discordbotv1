@@ -1,5 +1,7 @@
 import discord
 import random
+import requests
+import os
 from discord.ext import commands
 from discord.ext.commands import Bot
 
@@ -7,6 +9,21 @@ from discord.ext.commands import Bot
 
 client = commands.Bot(command_prefix = '!')
 
+#jokes and memes classes
+def tell_joke():
+	url = 'https://icanhazdadjoke.com/'
+	response = requests.get(url, headers={"Accept": "application/json"})
+	data = response.json()
+	return str(data['joke'])
+
+def get_meme():
+	url = 'https://meme-api.herokuapp.com/gimme'
+	response = requests.get(url, headers={"Accept": "application/json"})
+	data = response.json()
+	return str((data['url']))
+
+
+#blackjack classes
 class Card:
     def __init__(self, value, points, suit):
         self.value = value
@@ -119,7 +136,8 @@ async def on_ready():
 async def on_member_join(member):
     await member.send(f'You have joined a server with my presence')
 
-#Commands
+#Commands/Command-like Events
+#8ball
 @client.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
     responses = ["It is certain.",
@@ -144,12 +162,14 @@ async def _8ball(ctx, *, question):
                 "Very doubtful."]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
+#coinflip
 @client.command(aliases=['coinflip'])
 async def _coinflip(ctx):
     flipoutcome = ["heads",
                 "tails",]
     await ctx.send(f'The outcome was {random.choice(flipoutcome)}')
 
+#bet on coinflip
 @client.command(aliases=['betcoin'])
 async def _betcoin(ctx, *, bet):
     flipoutcomes = ["heads", "tails"]
@@ -165,6 +185,7 @@ async def _betcoin(ctx, *, bet):
     else:
         await ctx.send(f'https://www.nicepng.com/png/full/146-1464848_quarter-tail-png-tails-on-a-coin.png')
 
+#whoami
 @client.command(aliases=['whoami'])
 async def _whoami(message):
     bottomline = ["and you are not loved...",
@@ -179,8 +200,23 @@ async def _whoami(message):
                 "and your a piece of crap..."]
     await message.send(f'You are {message.author}\n{random.choice(bottomline)}')
 
+#Event Messages
 @client.event
 async def on_message(message):
+  #jokes and stuff
+    channel = message.channel
+    content = message.content
+    if content == '!joke':
+      joke = tell_joke()
+      await channel.send(joke)
+
+    if content.lower() == 'go corona':
+      await channel.send('Corona Go!')
+
+    if content == '!meme':
+      meme = get_meme()
+      await channel.send(meme)
+  #blackjack
     if message.content == "!blackjack":
         global deck, dealer_cards, players, player_cards
         deck = Deck()
@@ -241,6 +277,7 @@ async def on_message(message):
         player_sum = players[1].sum_cards()
         dealer_sum = players[0].sum_cards()
         await message.channel.send("Scores: You: " + str(player_sum) + " vs. Dealer: " + str(dealer_sum) + "\nType !blackjack to play again")
+
     await client.process_commands(message)
 
 #Runs the Bot
