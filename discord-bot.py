@@ -129,7 +129,7 @@ class Hand:
 #Events and Status
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for commands"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="!help"))
     print('Bot is active!')
 
 @client.event
