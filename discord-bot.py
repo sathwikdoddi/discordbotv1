@@ -169,6 +169,79 @@ async def _coinflip(ctx):
                 "tails",]
     await ctx.send(f'The outcome was {random.choice(flipoutcome)}')
 
+#insults
+@client.command(aliases=['attack'])
+async def _attack(message):
+  users = [client.get_user(499343877556273152), client.get_user(653974870379724835), client.get_user(618917655906222126), client.get_user(418403028463517708)]
+  attackPerson = random.choice(users)
+  insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+  await attackPerson.send(f'{random.choice(insults)}')
+
+@client.command(aliases=['attackSathwik'])
+async def _attackDoddi(message):
+	user = client.get_user(499343877556273152)
+	insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+	await user.send(f'{random.choice(insults)}')
+
+@client.command(aliases=['attackJaithra'])
+async def _attackJaithra(message):
+	user = client.get_user(653974870379724835)
+	insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+	await user.send(f'{random.choice(insults)}')
+
+@client.command(aliases=['attackManas'])
+async def _attackMoonas(message):
+	user = client.get_user(618917655906222126)
+	insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+	await user.send(f'{random.choice(insults)}')
+
+@client.command(aliases=['attackRamsey'])
+async def _attackRamsey(message):
+	user = client.get_user(418403028463517708)
+	insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+	await user.send(f'{random.choice(insults)}')
+
+@client.command(aliases=['attackMe'])
+async def _attackMe(message):
+	insults = ["Your fat",
+				"Lose Weight Fat piece of crap",
+				"You were a mistake",
+				"No one loves you",
+				"You are retarded",
+				"No one loves you and you are not loved",
+				"Your momma so fat, when the doctor checked her weight she said Hey! That's my phone number!"]
+	await message.author.send(f'{random.choice(insults)}')
+
 #bet on coinflip
 @client.command(aliases=['betcoin'])
 async def _betcoin(ctx, *, bet):
