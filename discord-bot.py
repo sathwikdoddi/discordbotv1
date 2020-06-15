@@ -263,7 +263,7 @@ async def _betcoin(ctx, *, bet):
 async def _whoami(message):
     bottomline = ["and you are not loved...",
                 "and no one likes you...",
-                "and you are gay...",
+                "and you are fat...",
                 "and you have no friends...",
                 "and I love you...",
                 "and you are a psychopath...",
@@ -276,9 +276,15 @@ async def _whoami(message):
 #Event Messages
 @client.event
 async def on_message(message):
-  #jokes and stuff
+    # Dad jokes
     channel = message.channel
     content = message.content
+
+    if message.content.startswith('im'):
+        messange = message.content
+        await channel.send(f'Hey there {messange[3:]}, I am Dad')
+  #jokes and stuff
+    
     if content == '!joke':
       joke = tell_joke()
       await channel.send(joke)
