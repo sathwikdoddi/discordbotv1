@@ -102,20 +102,17 @@ class Hand:
             ret_str += card.string() + ", "
         return ret_str[0:len(ret_str) - 2]
 
-    def ask_A(self):
+    async def ask_A(self, message):
         num_A = []
         for c in range(0, len(self.deck)):
             if self.deck[c].get_value() == "A" and self.deck[c].get_points() == 11:
                 num_A.append(c)
         for i in num_A:
-            print ("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
-            val = str(input("Change an A from 11 points to 1 point? (Y or N): "))
-            if val != "Y" and val != "N":
-                print ("Please answer with Y or N")
-            elif val == "Y":
-                self.deck[i].change_points(1)
-
-            print ("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
+            await message.channel.send("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
+            self.deck[i].change_points(1)
+            await message.channel.send("Changed value of Ace to prevent Loss")
+            await message.channel.send("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
+            await message.channel.send("Type !hit to hit and !slide to stay")
 
     def done(self):
         self.not_done = False
@@ -342,7 +339,7 @@ async def on_message(message):
         players[1].add_card(deck.draw(1))
         sum = players[1].sum_cards()
         if sum > 21:
-            players[1].ask_A()
+            await players[1].ask_A(message)
             sum = players[1].sum_cards()
             if sum > 21:
                 players[1].done()
