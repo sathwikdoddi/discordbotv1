@@ -110,7 +110,7 @@ class Hand:
         for i in num_A:
             await message.channel.send("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
             self.deck[i].change_points(1)
-            await message.channel.send("Changed value of Ace to prevent Loss")
+            await message.channel.send("Changed value of Ace to prevent Loss\n ‍ ")
             await message.channel.send("Your cards are " + str(self.print_cards()) + ", Total is " +  str(self.sum_cards()) + "\n")
             await message.channel.send("Type !hit to hit and !slide to stay")
 
