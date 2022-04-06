@@ -357,4 +357,4 @@ async def on_message(message):
     await client.process_commands(message)
 
 #Runs the Bot
-client.run('NzA5MjMzMzEzMTc2NDg1OTEw.Xrl6CA.PQVDKv0fuZErpaReL-OjNQaEU74')
+client.run('NzA5MjMzMzEzMTc2NDg1OTEw.Xri6_g.bJl0Jy_ucM7EWpvFEc19f-NElhQ')
